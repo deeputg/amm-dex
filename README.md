@@ -85,7 +85,7 @@ The transaction to withdraw the TOKEN-1 or TOKEN-2 tokens in exchange is a group
 
 ```
 python3 swap_t1_for_t2.py
-python3 swap_t1_for_t2.py
+python3 swap_t2_for_t1.py
 ```
 
 
