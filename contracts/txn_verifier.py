@@ -10,12 +10,12 @@ KEY_TOKEN2 = Bytes("T2")
 KEY_SS1_LP_TOKEN = Bytes("SSLT")
 KEY_SS2_LP_TOKEN = Bytes("SSLT2")
 
-TRANSACTION_TYPE_ADD_T1_SINGLE_LP_DEPOSIT = Bytes("a")
-TRANSACTION_TYPE_ADD_T2_SINGLE_LP_DEPOSIT = Bytes("b")
-TRANSACTION_TYPE_REFUND = Bytes("r")
-TRANSACTION_TYPE_PROTOCOL_REFUND = Bytes("p")
-TRANSACTION_TYPE_SWAP_DEPOSIT_TOKEN1_TO_TOKEN2 = Bytes("s1")
-TRANSACTION_TYPE_SWAP_DEPOSIT_TOKEN2_TO_TOKEN1 = Bytes("s2")
+TXN_TYPE_ADD_T1_SINGLE_LP_DEPOSIT = Bytes("a")
+TXN_TYPE_ADD_T2_SINGLE_LP_DEPOSIT = Bytes("b")
+TXN_TYPE_REFUND = Bytes("r")
+TXN_TYPE_PROTOCOL_REFUND = Bytes("p")
+TXN_TYPE_SWAP_DEPOSIT_TOKEN1_TO_TOKEN2 = Bytes("s1")
+TXN_TYPE_SWAP_DEPOSIT_TOKEN2_TO_TOKEN1 = Bytes("s2")
 
 
 def approval_program():
@@ -201,14 +201,14 @@ def approval_program():
             on_closeout],
         [Txn.on_completion() == OnComplete.OptIn,
             on_opt_in],
-        [Or(Txn.application_args[0] == TRANSACTION_TYPE_SWAP_DEPOSIT_TOKEN1_TO_TOKEN2,
-            Txn.application_args[0] == TRANSACTION_TYPE_SWAP_DEPOSIT_TOKEN2_TO_TOKEN1),
+        [Or(Txn.application_args[0] == TXN_TYPE_SWAP_DEPOSIT_TOKEN1_TO_TOKEN2,
+            Txn.application_args[0] == TXN_TYPE_SWAP_DEPOSIT_TOKEN2_TO_TOKEN1),
             on_swap_deposit],
-        [Or(Txn.application_args[0] == TRANSACTION_TYPE_ADD_T1_SINGLE_LP_DEPOSIT,
-            Txn.application_args[0] == TRANSACTION_TYPE_ADD_T2_SINGLE_LP_DEPOSIT,),
+        [Or(Txn.application_args[0] == TXN_TYPE_ADD_T1_SINGLE_LP_DEPOSIT,
+            Txn.application_args[0] == TXN_TYPE_ADD_T2_SINGLE_LP_DEPOSIT,),
             on_add_lp_deposit],     
-        [Or(Txn.application_args[0] == TRANSACTION_TYPE_REFUND,
-            Txn.application_args[0] == TRANSACTION_TYPE_PROTOCOL_REFUND),
+        [Or(Txn.application_args[0] == TXN_TYPE_REFUND,
+            Txn.application_args[0] == TXN_TYPE_PROTOCOL_REFUND),
             on_refund],
     )
     return program
