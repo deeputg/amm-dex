@@ -2,7 +2,8 @@
 ## Introduction
 NetSwap is an AMM decentralized exchange on Algorand blockchain.
 ## Netswap protocol
-There are three participants in Netswap - Liquidity providers(LP), Traders(users), Protocol Developers - of the DEX dApp create three different transaction types. The Protocol developer creates a Liquidity pool by deploying the escrow contract. Liquidity Providers deposite funds to the already created Liquidity pools. Since it is a single sided liquidity protocol, liquidity providers can deposite either one of the pool tokens. Traders choose and swap their token for another token from the liquidity pool. Each swap will be charged with a swap fee of 0.45% and protocol developer fee of 0.05%. The Liquidity providers can withdraw there funds from the pools using the lp tokens.
+There are three participants in Netswap - Liquidity providers(LP), Traders(users), Protocol Developers. 
+The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. Traders can swap their token for another token from the liquidity pool. Each swap will be charged with a swap fee and a protocol developer fee. 
 
 
 ## Pre requisites
@@ -27,8 +28,8 @@ Deploy the stateful contracts in order by updating the IDs of previous contracts
 
 ### Creating Liquidity Pool
 To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Create the Algorand assets (ASAs) required for the main tokens and LP tokens. Replace the TOKEN IDs accordingly in pool_escrow.py and developer_lsig.py. 
-Compile the escrow code to receive an escrow address and logic signature. Fund the escrow contract with required ALGOs and optin to stateful contracts.
-Compile the developer_lsig to receive the developer's lsig, to be used for minting tokens.
+Compile the pool_escrow code to receive an escrow address and logic signature. Fund the escrow contract with required ALGOs and optin to stateful contracts.
+Compile the developer_lsig code to receive the developer's lsig, to be used for minting tokens.
 
 
 ### Adding Liquidity
