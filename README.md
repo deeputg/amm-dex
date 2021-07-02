@@ -1,6 +1,6 @@
 # NetSwap: NetObjex's Decentralized Exchange on Algorand
 ## Introduction
-NetSwap is an Automated MArket Maker (AMM) type decentralized exchange hosted on the Algorand blockchain.  
+NetSwap is an Automated Market Maker (AMM) type decentralized exchange hosted on the Algorand blockchain.  
 ## NetSwap protocol
 There are three participants in Netswap - Liquidity Providers (or LP), Traders (or users), and Protocol Developers (that's us). \
  \
