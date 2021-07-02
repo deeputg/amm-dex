@@ -5,14 +5,15 @@ NetSwap is an AMM decentralized exchange on Algorand blockchain.
 There are three participants in Netswap - Liquidity providers(LP), Traders(users), Protocol Developers - of the DEX dApp create three different transaction types. The Protocol developer creates a Liquidity pool by deploying the escrow contract. Liquidity Providers deposite funds to the already created Liquidity pools. Since it is a single sided liquidity protocol, liquidity providers can deposite either one of the pool tokens. Traders choose and swap their token for another token from the liquidity pool. Each swap will be charged with a swap fee of 0.45% and protocol developer fee of 0.05%. The Liquidity providers can withdraw there funds from the pools using the lp tokens.
 
 
-## Pre requisits
+## Pre requisites
 - python 3
 - pyteal 0.7.0
 
 ## Instructions
 Please follow the following instructions to deploy and test the dex application. Also, create an environment file to declare values of env variables. 
 
-### pyteal to teal
+### Deploy contracts
+Compile contracts :
 ```
 cd contracts
 python3 state_manager0.py
@@ -20,11 +21,12 @@ python3 state_manager1.py
 python3 txn_verifier.py
 python3 pool_escrow.py
 python3 developer_lsig.py
-cd ..
 ```
+Deploy the stateful contracts in order by updating the IDs of previous contracts in further contracts. 
+
 
 ### Creating Liquidity Pool
-To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Replace the TOKEN IDs accordingly in pool_escrow.py and compile the escrow code to receive an escrow address and logic signature.
+To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Create the required Algorand assets (ASAs) required for the main tokens and LP tokens. Replace the TOKEN IDs accordingly in pool_escrow.py and compile the escrow code to receive an escrow address and logic signature. Fund the escrow contract with required ALGOs and optin to stateful contracts.
 
 
 ### Adding Liquidity
@@ -64,6 +66,7 @@ python3 type2_single_side_liq.py
 
 
 ### Token Swapping
+The user must initially optin to the stateful contracts and assets involved.  
 ####Swap TOKEN-1 for TOKEN-2 tokens (and vice-versa):
 The transaction to swap tokens for another is a group transaction containing four transactions. 
 1. Call to txn_verifier stateful contract
