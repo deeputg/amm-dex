@@ -3,9 +3,8 @@
 NetSwap is an Automated Market Maker (AMM) type decentralized exchange hosted on the Algorand blockchain.  
 ## NetSwap protocol
 There are three participants in Netswap - Liquidity Providers (or LP), Traders (or users), and Protocol Developers (that's us). \
- \
-- The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. \
-- Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. \
+- The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. 
+- Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. 
 - Traders can swap their tokens for another token from the liquidity pool. Each swap will be charged with a swap fee and a developer fee. 
 
 ## Pre-requisites
