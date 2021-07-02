@@ -2,7 +2,7 @@
 ## Introduction
 NetSwap is an Automated Market Maker (AMM) type decentralized exchange hosted on the Algorand blockchain.  
 ## NetSwap protocol
-There are three participants in Netswap - Liquidity Providers (or LP), Traders (or users), and Protocol Developers (that's us). \
+There are three participants in NetSwap - Liquidity Providers (or LP), Traders (or users), and Protocol Developers (that's us). 
 - The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. 
 - Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. 
 - Traders can swap their tokens for another token from the liquidity pool. Each swap will be charged with a swap fee and a developer fee. 
@@ -12,7 +12,8 @@ There are three participants in Netswap - Liquidity Providers (or LP), Traders (
 - pyteal 0.7.0
 
 ## Instructions
-Follow these instructions to deploy and test the DEX application. Also, create an environment file to declare values of the env variables. 
+Follow these instructions to deploy and test the DEX application. \
+Also, create a .env file to declare the values of environment variables. 
 
 ### Deploy contracts
 Running the python code would compile and generate the smart contracts in TEAL.
@@ -25,7 +26,7 @@ python3 pool_escrow.py
 python3 developer_lsig.py
 ```
 Deploy each stateful TEAL contract in the order specified above, this will return an Application Index or AppID. \
-Before deploying the current contract check whether it has a dependency on the App Index (or Indices) of a preceding contract and update it accordingly.
+Note: Before deploying the current contract check whether it has a dependency on the App Index (or Indices) of a preceding contract and update it accordingly.
 
 ### Creating Liquidity Pool
 To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Create the Algorand assets (ASAs) required for the main tokens and LP tokens. Replace the TOKEN IDs accordingly in pool_escrow.py and developer_lsig.py. 
