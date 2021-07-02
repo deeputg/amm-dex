@@ -215,3 +215,11 @@ def approval_program():
 
 def clear_program():
     return Int(1)
+
+if __name__ == "__main__":
+    txn_verifier_approve_teal_code = compileTeal(approval_program(), Mode.Application)
+    with open('./build/txn_verifier_approval.teal', 'w') as f:
+        f.write(txn_verifier_approve_teal_code)
+    txn_verifier_clear_teal_code = compileTeal(clear_program(), Mode.Application)    
+    with open('./build/txn_verifier_clear.teal', 'w') as f:
+        f.write(txn_verifier_clear_teal_code)

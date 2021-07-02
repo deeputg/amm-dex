@@ -263,7 +263,7 @@ def approval_program():
             And(
                 Gtxn[2].xfer_asset() == read_key_token2,
                 Gtxn[2].asset_amount() <= read_user_unused_token2(Txn.accounts[1]),
-                Txn.application_args[0] == TRANSACTION_TYPE_REFUND
+                Txn.application_args[0] == TXN_TYPE_REFUND
             ),
             
             # USER_UNUSED_TOKEN2 = USER_UNUSED_TOKEN2 - Gtxn[2].asset_amount()
@@ -276,7 +276,7 @@ def approval_program():
             And(
                 Gtxn[2].xfer_asset() == read_key_token2,
                 Gtxn[2].asset_amount() <= scratchvar_total_token2_burn_bal.load(),
-                Txn.application_args[0] == TRANSACTION_TYPE_PROTOCOL_REFUND
+                Txn.application_args[0] == TXN_TYPE_PROTOCOL_REFUND
             ),
             # PROTOCOL_UNUSED_TOKEN2 = PROTOCOL_UNUSED_TOKEN2 - Gtxn[2].asset_amount()
             write_protocol_unused_token2(
@@ -342,3 +342,11 @@ def approval_program():
 
 def clear_program():
     return Int(1)
+
+if __name__ == "__main__":
+    state_manager0_approve_teal_code = compileTeal(approval_program(), Mode.Application)
+    with open('./build/state_manager0_approval.teal', 'w') as f:
+        f.write(state_manager0_approve_teal_code)
+    state_manager0_clear_teal_code = compileTeal(clear_program(), Mode.Application)    
+    with open('./build/state_manager0_clear.teal', 'w') as f:
+        f.write(state_manager0_clear_teal_code)

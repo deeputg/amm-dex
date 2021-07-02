@@ -1,0 +1,531 @@
+#pragma version 2
+txn ApplicationID
+int 0
+==
+bnz l49
+txn OnCompletion
+int CloseOut
+==
+bnz l48
+txn OnCompletion
+int OptIn
+==
+bnz l44
+txna ApplicationArgs 0
+byte "a"
+==
+bnz l32
+txna ApplicationArgs 0
+byte "b"
+==
+bnz l21
+txna ApplicationArgs 0
+byte "s1"
+==
+txna ApplicationArgs 0
+byte "s2"
+==
+||
+bnz l20
+txna ApplicationArgs 0
+byte "r"
+==
+txna ApplicationArgs 0
+byte "p"
+==
+||
+bnz l8
+err
+l8:
+int 1
+byte "BURN"
+app_local_get
+store 10
+gtxn 2 XferAsset
+int 1
+byte "T1"
+app_local_get
+==
+gtxn 2 AssetAmount
+int 0
+byte "U1"
+txna Accounts 1
+concat
+app_local_get
+<=
+&&
+bnz l18
+gtxn 2 XferAsset
+int 1
+byte "T2"
+app_local_get
+==
+gtxn 2 AssetAmount
+int 0
+byte "U2"
+txna Accounts 1
+concat
+app_local_get
+<=
+&&
+txna ApplicationArgs 0
+byte "r"
+==
+&&
+bnz l17
+gtxn 2 XferAsset
+int 1
+byte "T2"
+app_local_get
+==
+gtxn 2 AssetAmount
+load 10
+<=
+&&
+txna ApplicationArgs 0
+byte "p"
+==
+&&
+bnz l16
+gtxn 2 XferAsset
+int 1
+byte "SSLT"
+app_local_get
+==
+gtxn 2 AssetAmount
+int 0
+byte "S1"
+txna Accounts 1
+concat
+app_local_get
+<=
+&&
+bnz l15
+gtxn 2 XferAsset
+int 1
+byte "SSLT2"
+app_local_get
+==
+gtxn 2 AssetAmount
+int 0
+byte "S2"
+txna Accounts 1
+concat
+app_local_get
+<=
+&&
+bnz l14
+err
+l14:
+int 0
+byte "S2"
+txna Accounts 1
+concat
+int 0
+byte "S2"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
+-
+app_local_put
+b l19
+l15:
+int 0
+byte "S1"
+txna Accounts 1
+concat
+int 0
+byte "S1"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
+-
+app_local_put
+b l19
+l16:
+int 1
+byte "BURN"
+load 10
+gtxn 2 AssetAmount
+-
+app_local_put
+b l19
+l17:
+int 0
+byte "U2"
+txna Accounts 1
+concat
+int 0
+byte "U2"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
+-
+app_local_put
+b l19
+l18:
+int 0
+byte "U1"
+txna Accounts 1
+concat
+int 0
+byte "U1"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
+-
+app_local_put
+l19:
+int 1
+b l50
+l20:
+int 1
+txna ApplicationArgs 2
+btoi
+byte "B1"
+app_local_get_ex
+store 12
+store 13
+int 1
+txna ApplicationArgs 2
+btoi
+byte "B2"
+app_local_get_ex
+store 14
+store 15
+int 1
+byte "B1"
+load 13
+app_local_put
+int 1
+byte "B2"
+load 15
+app_local_put
+int 1
+b l50
+l21:
+int 1
+byte "B2"
+app_local_get
+store 3
+int 1
+byte "B2M"
+app_local_get
+store 9
+int 1
+byte "LD1"
+app_local_get
+store 4
+int 1
+byte "LD2"
+app_local_get
+store 5
+int 1
+byte "BURN"
+app_local_get
+store 10
+int 1
+byte "P1"
+app_local_get
+store 11
+load 9
+int 0
+>
+bnz l23
+err
+l23:
+load 3
+load 9
+-
+store 7
+gtxn 2 AssetAmount
+load 9
+<
+bnz l25
+load 9
+store 8
+b l26
+l25:
+gtxn 2 AssetAmount
+store 8
+l26:
+load 5
+int 0
+==
+bnz l28
+load 5
+load 8
+*
+load 7
+/
+store 6
+b l29
+l28:
+load 8
+store 6
+l29:
+load 6
+txna ApplicationArgs 1
+btoi
+>=
+bnz l31
+err
+l31:
+int 0
+byte "U2"
+txna Accounts 1
+concat
+int 0
+byte "U2"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
+load 8
+-
++
+app_local_put
+int 1
+byte "BURN"
+load 10
+load 8
++
+app_local_put
+int 0
+byte "S2"
+txna Accounts 1
+concat
+int 0
+byte "S2"
+txna Accounts 1
+concat
+app_local_get
+load 6
+int 2
+/
++
+app_local_put
+int 1
+byte "P1"
+load 11
+load 6
+int 2
+/
+-
+app_local_put
+int 1
+byte "B2M"
+load 9
+load 8
+-
+app_local_put
+int 1
+byte "LD2"
+load 5
+load 6
++
+app_local_put
+int 1
+b l50
+l32:
+int 1
+byte "B1"
+app_local_get
+store 2
+int 1
+byte "B2"
+app_local_get
+store 3
+int 1
+byte "B2M"
+app_local_get
+store 9
+int 1
+byte "LD1"
+app_local_get
+store 4
+int 1
+byte "LD2"
+app_local_get
+store 5
+int 1
+byte "BURN"
+app_local_get
+store 10
+int 1
+byte "P1"
+app_local_get
+store 11
+load 4
+load 5
++
+int 0
+==
+bnz l40
+gtxn 3 AssetAmount
+load 2
+*
+load 3
+/
+store 7
+gtxn 2 AssetAmount
+load 7
+<
+bnz l35
+load 7
+store 0
+b l36
+l35:
+gtxn 2 AssetAmount
+store 0
+l36:
+gtxn 2 AssetAmount
+load 3
+*
+load 2
+/
+store 7
+gtxn 3 AssetAmount
+load 7
+<
+bnz l38
+load 7
+store 1
+b l39
+l38:
+gtxn 3 AssetAmount
+store 1
+l39:
+load 4
+load 0
+*
+load 2
+/
+store 6
+b l41
+l40:
+gtxn 2 AssetAmount
+store 0
+gtxn 3 AssetAmount
+store 1
+gtxn 2 AssetAmount
+store 6
+l41:
+load 6
+txna ApplicationArgs 1
+btoi
+>=
+bnz l43
+err
+l43:
+int 0
+byte "U1"
+txna Accounts 1
+concat
+int 0
+byte "U1"
+txna Accounts 1
+concat
+app_local_get
+gtxn 2 AssetAmount
++
+load 0
+-
+app_local_put
+int 1
+byte "BURN"
+load 10
+gtxn 3 AssetAmount
++
+load 1
+-
+app_local_put
+int 1
+byte "B1"
+load 2
+load 0
++
+app_local_put
+int 1
+byte "B2"
+load 3
+load 1
++
+app_local_put
+int 1
+byte "B2M"
+load 9
+load 1
++
+app_local_put
+int 0
+byte "S1"
+txna Accounts 1
+concat
+int 0
+byte "S1"
+txna Accounts 1
+concat
+app_local_get
+load 6
+int 2
+/
++
+app_local_put
+int 1
+byte "P1"
+load 11
+load 6
+int 2
+/
++
+app_local_put
+int 1
+byte "LD1"
+load 4
+load 6
++
+app_local_put
+int 1
+b l50
+l44:
+txn NumAppArgs
+int 4
+==
+bnz l46
+int 1
+b l47
+l46:
+int 0
+byte "T1"
+txna ApplicationArgs 0
+btoi
+app_local_put
+int 0
+byte "T2"
+txna ApplicationArgs 1
+btoi
+app_local_put
+int 0
+byte "SSLT"
+txna ApplicationArgs 2
+btoi
+app_local_put
+int 0
+byte "SSLT2"
+txna ApplicationArgs 3
+btoi
+app_local_put
+int 1
+l47:
+b l50
+l48:
+int 1
+b l50
+l49:
+int 1
+l50:

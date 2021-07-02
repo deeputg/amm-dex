@@ -113,4 +113,7 @@ def logicsig():
 
 
 if __name__ == "__main__":
-    print(compileTeal(logicsig, Mode.Signature))
+    with open('build/escrow_lsig.teal', 'w') as f:
+        program = logicsig()
+        compiled = compileTeal(program, Mode.Signature)
+        f.write(compiled)
