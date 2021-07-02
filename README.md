@@ -26,7 +26,7 @@ python3 pool_escrow.py
 python3 developer_lsig.py
 ```
 Deploy each stateful TEAL contract in the order specified above, this will return an Application Index or AppID. \
-Note: Before deploying the current contract check whether it has a dependency on the App Index (or Indices) of a preceding contract and update it accordingly.
+Note: Before deploying the current contract check whether it has a dependency on the App Index (or Indices) of preceding contracts and update it accordingly.
 
 ### Creating Liquidity Pool
 To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Create the Algorand assets (ASAs) required for the main tokens and LP tokens. Replace the TOKEN IDs accordingly in pool_escrow.py and developer_lsig.py. 
