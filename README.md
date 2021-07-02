@@ -1,20 +1,24 @@
-# NetSwap : NetObjex's Decentralized Exchange on Algorand Blockchain
+# NetSwap: NetObjex's Decentralized Exchange on Algorand
 ## Introduction
-NetSwap is an AMM decentralized exchange on Algorand blockchain.
-## Netswap protocol
-There are three participants in Netswap - Liquidity providers(LP), Traders(users), Protocol Developers. 
-The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. Traders can swap their token for another token from the liquidity pool. Each swap will be charged with a swap fee and a protocol developer fee. 
+NetSwap is an Automated MArket Maker (AMM) type decentralized exchange hosted on the Algorand blockchain.  
+## NetSwap protocol
+There are three participants in Netswap - Liquidity Providers (or LP), Traders (or users), and Protocol Developers (that's us). \
+-
+The Protocol developers are responsible for maintaining and upgrading the protocol. They also manage the creation of new Liquidity pools in the DEX. \
+-
+Liquidity Providers deposit their funds in the Liquidity pools and in return receive a share of the trade fees generated during swapping. Since it is a single-sided liquidity protocol, liquidity providers can deposit either one of the pool tokens. At any time, they can withdraw their contribution to the pools using their LP tokens. \
+-
+Traders can swap their tokens for another token from the liquidity pool. Each swap will be charged with a swap fee and a developer fee. 
 
-
-## Pre requisites
+## Pre-requisites
 - python 3
 - pyteal 0.7.0
 
 ## Instructions
-Please follow the following instructions to deploy and test the DEX application. Also, create an environment file to declare values of the env variables. 
+Follow these instructions to deploy and test the DEX application. Also, create an environment file to declare values of the env variables. 
 
 ### Deploy contracts
-Compile contracts :
+Running the python code would compile and generate the smart contracts in TEAL.
 ```
 cd contracts
 python3 state_manager0.py
@@ -23,14 +27,13 @@ python3 txn_verifier.py
 python3 pool_escrow.py
 python3 developer_lsig.py
 ```
-Deploy the stateful contracts in order by updating the IDs of previous contracts in the further contracts. 
-
+Deploy each stateful TEAL contract in the order specified above, this will return an Application Index or AppID. \
+Before deploying the current contract check whether it has a dependency on the App Index (or Indices) of a preceding contract and update it accordingly.
 
 ### Creating Liquidity Pool
 To create a new liquidity pool, the developer has to configure a new escrow account to manage the funds. Create the Algorand assets (ASAs) required for the main tokens and LP tokens. Replace the TOKEN IDs accordingly in pool_escrow.py and developer_lsig.py. 
-Compile the pool_escrow code to receive an escrow address and logic signature. Fund the escrow contract with required ALGOs and optin to stateful contracts.
+Compile the pool_escrow code to receive an escrow address and logic signature. Fund the escrow contract with required ALGOs and opt-in to stateful contracts.
 Compile the developer_lsig code to receive the developer's lsig, to be used for minting tokens.
-
 
 ### Adding Liquidity
 #### Type-1 Single Sided liquidity (TOKEN-1 contribution) :
@@ -67,9 +70,8 @@ The transaction to withdraw the unused TOKEN-2 tokens or to collect LP tokens is
 python3 type2_single_side_liq.py
 ```
 
-
 ### Token Swapping
-The user must initially optin to the stateful contracts and assets involved before swapping.  
+The user must initially opt-in to the stateful contracts and assets involved before swapping.  
 
 #### Swap TOKEN-1 for TOKEN-2 tokens (and vice-versa):
 The transaction to swap tokens for another is a group transaction containing four transactions. 
@@ -81,13 +83,9 @@ The transaction to swap tokens for another is a group transaction containing fou
 The transaction to withdraw the TOKEN-1 or TOKEN-2 tokens in exchange is a group transaction containing three transactions. 
 1. Call to txn_verifier stateful contract
 2. Call to state_manager1 stateful contract
-3. Asset transfer txn to withdraw TOKEN-1 or TOKEN-2 tokens from escrow to user
+3. Asset transfer txn to withdraw TOKEN-1 or TOKEN-2 tokens from escrow to the user
 
 ```
 python3 swap_t1_for_t2.py
 python3 swap_t2_for_t1.py
 ```
-
-
-
-
