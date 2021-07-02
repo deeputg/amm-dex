@@ -172,7 +172,7 @@ def approval_program():
             And(
                 Gtxn[2].xfer_asset() == read_key_token2,
                 Gtxn[2].asset_amount() <= read_user_unused_token2(Txn.accounts[1]),
-                Txn.application_args[0] == TRANSACTION_TYPE_REFUND
+                Txn.application_args[0] == TXN_TYPE_REFUND
             ),
             
             # USER_UNUSED_TOKEN2 = USER_UNUSED_TOKEN2 - Gtxn[2].asset_amount()
@@ -216,3 +216,12 @@ def approval_program():
 
 def clear_program():
     return Int(1)
+
+
+if __name__ == "__main__":
+    state_manager1_approve_teal_code = compileTeal(approval_program(), Mode.Application)
+    with open('./build/state_manager1_approval.teal', 'w') as f:
+        f.write(state_manager1_approve_teal_code)
+    state_manager1_clear_teal_code = compileTeal(clear_program(), Mode.Application)    
+    with open('./build/state_manager1_clear.teal', 'w') as f:
+        f.write(state_manager1_clear_teal_code)    
